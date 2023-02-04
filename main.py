@@ -5,6 +5,7 @@ import csv
 import pandas as pd
 
 cryptocsv = pd.read_csv("cryptos-jan23.csv", names=["ticker", "count", "date"])
+cryptocsv['ticker'] = cryptocsv['ticker'].str.replace('\W', '', regex=True)
 df = cryptocsv.groupby(["ticker"]).count()
 print(df)
 
