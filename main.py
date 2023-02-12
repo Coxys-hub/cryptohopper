@@ -10,7 +10,6 @@ df = cryptocsv.groupby(["ticker"]).count()
 df2 = df.loc[df['count'].isin([40])]
 print(df2)
 
-
 # ask if user wants to dump contents of dataframe to CSV
 exportcontrol = input("Do you want to dump the above to csv? Y/N ")
 
