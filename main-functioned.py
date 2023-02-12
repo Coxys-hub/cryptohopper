@@ -8,25 +8,21 @@ cryptocsv = pd.read_csv("cryptos-jan23.csv", names=["ticker", "count", "date"])
 
 #strip BS characters from the ticker colum
 cryptocsv["ticker"] = cryptocsv["ticker"].str.replace('\W', '', regex=True)
+re_indexed_csv = cryptocsv.set_index(['ticker', 'count'])
 
-#slice out cryptos that match [XX]count
-#df = cryptocsv.loc[cryptocsv["count"].isin([20])]
 
-df = cryptocsv[(cryptocsv['count'] >= 35) & (cryptocsv['count'] <=51)]
+print(re_indexed_csv)
 
-#df = cryptocsv.groupby(['ticker'])
-#print(df.first())
-print(df)
 
 # ask if user wants to dump contents of dataframe to CSV
 def export_control():
     asktosave = input("Do you want to dump the above to csv? Y/N ")
 
     if asktosave.lower() == "y":
-        df.to_csv("./csvdump.csv")
+        re_indexed_csv.to_csv("./csvdump.csv")
         print("dumped to csv")
     else:
         print("DID NOT DUMP TO CSV")
 
-export_control()
+#export_control()
 
